@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice AI Interface</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 40px auto; background: #f4f4f9; padding: 20px; }
+        #chat-container { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; }
+        #chat-box { height: 400px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 20px; padding: 10px; }
+        .message { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .user-msg { background: #e3f2fd; text-align: right; }
+        .ai-msg { background: #f1f8e9; text-align: left; }
+        #input-area { display: flex; gap: 10px; align-items: center; }
+        input { flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
+        button { padding: 12px 20px; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; transition: background 0.3s; }
+        #send-btn { background: #2196f3; }
+        #send-btn:hover { background: #1976d2; }
+        #mic-btn { background: #f44336; display: flex; align-items: center; justify-content: center; width: 50px; border-radius: 50%; }
+        #mic-btn.listening { background: #4caf50; animation: pulse 1.5s infinite; }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="chat-container">
+    <div id="chat-box"></div>
+    <div id="input-area">
+        <button id="mic-btn" onclick="toggleMic()" title="Click to speak">🎤</button>
+        <input type="text" id="userInput" placeholder="Type or click the mic to speak...">
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<audio id="end-sound" src="/static/goodbye.mp3" preload="auto"></audio>
+
+<script>
+    const input = document.getElementById('userInput');
+    const chatBox = document.getElementById('chat-box');
+    const endSound = document.getElementById('end-sound');
+    const micBtn = document.getElementById('mic-btn');
+    
+    // Web Speech API Setup
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition;
+    let isListening = false;
+
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false; // Stop listening automatically when the user pauses
+        recognition.interimResults = true; // Show words as they are being spoken
+
+        recognition.onstart = function() {
+            isListening = true;
+            micBtn.classList.add('listening');
+            input.placeholder = "Listening...";
+            input.value = "";
+        };
+
+        recognition.onresult = function(event) {
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                transcript += event.results[i][0].transcript;
+            }
+            input.value = transcript; // Display text in real-time
+        };
+
+        recognition.onend = function() {
+            isListening = false;
+            micBtn.classList.remove('listening');
+            input.placeholder = "Type or click the mic to speak...";
+            
+            // Automatically send the message if there is text
+            if (input.value.trim() !== "") {
+                sendMessage();
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.error("Speech recognition error", event.error);
+            isListening = false;
+            micBtn.classList.remove('listening');
+        };
+    } else {
+        micBtn.style.display = 'none';
+        console.warn("Speech Recognition API not supported in this browser.");
+    }
+
+    function toggleMic() {
+        if (isListening) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
+    }
+
+    async function sendMessage() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Display user message
+        chatBox.innerHTML += `<div class="message user-msg"><b>You:</b> ${text}</div>`;
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        if (text.toLowerCase() === 'end') {
+            endSound.play();
+        }
+
+        try {
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: text })
+            });
+
+            const data = await response.json();
+            
+            // Display AI response
+            chatBox.innerHTML += `<div class="message ai-msg"><b>Agent:</b> ${data.answer}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+        } catch (error) {
+            console.error("Error:", error);
+            chatBox.innerHTML += `<div class="message ai-msg" style="color:red;"><b>Error:</b> Could not reach the server.</div>`;
+        }
+    }
+
+    document.getElementById('userInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+</script>
+
+</body>
+</html>

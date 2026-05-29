@@ -1,0 +1,19 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+models/
+checkpoints/
+*.pth
+*.pt
+*.bin
+*.onnx
+*.wav
+*.mp3
+.cache/
+node_modules/
+dist/
+build/
+# Folder with dummy/test files
+Useless_Files
