@@ -33,8 +33,8 @@ And yes, it possesses a highly sarcastic, energetic personality that strictly ad
 
 1. **Clone the repository:**
    ```bash 
-   git clone https://github.com/YOUR_USERNAME/REPO_NAME.git
-   cd REPO_NAME
+   git clone https://github.com/HydroLock/AI-Assistant.git
+   cd AI-Assistant
 
 2. **Install Python Dependencies:**
    ```bash
