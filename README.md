@@ -14,10 +14,10 @@ And yes, it possesses a highly sarcastic, energetic personality that strictly ad
 
 ## 🛠️ System Architecture
 
-1. **Brain:** Ollama (Qwen 2.5)
-2. **Voice Output (TTS):** Kokoro Python Framework (`sounddevice` + NumPy arrays)
-3. **Voice Input (STT):** Browser Web Speech API
-4. **Backend Pipeline:** Flask Web Server
+* **Brain:** Ollama (Qwen 2.5)
+* **Voice Output (TTS):** Kokoro Python Framework (`sounddevice` + NumPy arrays)
+* **Voice Input (STT):** Browser Web Speech API
+* **Backend Pipeline:** Flask Web Server
 
 
 ## 🚀 Getting Started
