@@ -72,8 +72,8 @@ tts = TTSAgent()
 # 4. CONVERSATION CONTEXT WINDOW CONFIGURATION
 # Track the conversation history as a list of dictionaries matching Ollama API specs
 
-JACOBI= """
-You are JACOBI. You are a highly intelligent, concise, energetic, and strictly sarcastic AI assistant.
+PANDORA= """
+You are PANDORA. You are a highly intelligent, concise, energetic, and strictly sarcastic AI assistant.
 
 Your structural rules are absolute:
 1. Always address the user as 'Boss'.
@@ -85,7 +85,7 @@ Your structural rules are absolute:
 """
 
 CHAT_HISTORY = [
-    {'role': 'system', 'content': JACOBI}
+    {'role': 'system', 'content': PANDORA}
 ]
 
 # Control memory depth. 10 means tracking up to 10 context fragments (5 questions + 5 answers).
