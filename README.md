@@ -6,10 +6,10 @@ And yes, it possesses a highly sarcastic, energetic personality that strictly ad
 **NOTE: Depending on the user's choice, they can modify the behaviour and name of the agent. To make these changes, user must visit lines 75-88 in agent.py and change the behaviour and name as per their wish in natural language.**
 
 ## ✨ Core Features
--> **Zero-RAM STT Architecture:** Utilizes the native Web Speech API in the browser for voice capture, leaving your machine's full RAM available for modeling.
--> **Fine-Tuned Persona Logic:** Driven by custom system parameters over `Ollama` ensuring strict structural obedience (no markdown, no emojis, tailored greeting strings).
--> **Parallel Core Processing:** Uses multi-threading to display an active terminal "thinking animation" while computing replies, stopping instantly the millisecond audio playback begins.
--> **Localized Audio Synthesis:** Backed by Kokoro TTS for pristine, near-human audio rendering without external cloud API dependencies.
+1. **Zero-RAM STT Architecture:** Utilizes the native Web Speech API in the browser for voice capture, leaving your machine's full RAM available for modeling.
+2. **Fine-Tuned Persona Logic:** Driven by custom system parameters over `Ollama` ensuring strict structural obedience (no markdown, no emojis, tailored greeting strings).
+3. **Parallel Core Processing:** Uses multi-threading to display an active terminal "thinking animation" while computing replies, stopping instantly the millisecond audio playback begins.
+4. **Localized Audio Synthesis:** Backed by Kokoro TTS for pristine, near-human audio rendering without external cloud API dependencies.
 
 
 ## 🛠️ System Architecture
