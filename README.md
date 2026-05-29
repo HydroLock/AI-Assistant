@@ -14,18 +14,18 @@ And yes, it possesses a highly sarcastic, energetic personality that strictly ad
 
 ## 🛠️ System Architecture
 
--> **Brain:** Ollama (Qwen 2.5)
--> **Voice Output (TTS):** Kokoro Python Framework (`sounddevice` + NumPy arrays)
--> **Voice Input (STT):** Browser Web Speech API
--> **Backend Pipeline:** Flask Web Server
+1. **Brain:** Ollama (Qwen 2.5)
+2. **Voice Output (TTS):** Kokoro Python Framework (`sounddevice` + NumPy arrays)
+3. **Voice Input (STT):** Browser Web Speech API
+4. **Backend Pipeline:** Flask Web Server
 
 
 ## 🚀 Getting Started
 
 ### Prerequisites
--> Python 3.10 or higher.
--> [Ollama](https://ollama.com/) installed and running locally.
--> Atleast 8GB RAM.
+1. Python 3.10 or higher.
+2. [Ollama](https://ollama.com/) installed and running locally.
+3. Atleast 8GB RAM.
 
 ### Installation
 
@@ -45,16 +45,17 @@ And yes, it possesses a highly sarcastic, energetic personality that strictly ad
    ollama pull qwen2.5
 
 4. **Model Weights Setup:**
-   Download and place your kokoro-v1.0.onnx and voices-v1.0.bin files directly in your project root directory. (Note: These are ignored by Git due to file size constraints).
-   Download kokoro-v1.0.onnx from https://github.com/taylorchu/kokoro-onnx/releases/tag/v0.2.0 [Download the file listed as kokoro.onnx and rename it as kokoro-v1.0.onnx to avoid future conflicts.]
-   Download voices-v1.0.bin from https://huggingface.co/hexgrad/Kokoro-82M/tree/main [From folder titled **voices**]
+   * Download and place your **kokoro-v1.0.onnx** and **voices-v1.0.bin** files directly in your project root directory. **(Note: These are ignored by Git due to file size constraints).**
+   * Download **kokoro-v1.0.onnx** from https://github.com/taylorchu/kokoro-onnx/releases/tag/v0.2.0 [Download the file listed as kokoro.onnx and rename it as kokoro-v1.0.onnx to avoid future conflicts.]
+   * Download **voices-v1.0.bin** from https://huggingface.co/hexgrad/Kokoro-82M/tree/main [From folder titled **voices**]
 
 ### Running the Agent
 
 1. Launch your Flask backend server:
+   ```bash
    python agent.py
 
-2. Open your local browser interface (typically http://127.0.0.1:5000).
-3. Allow microphone permissions, activate your agent, and start talking to the Boss.
+2. Open your local browser interface (http://127.0.0.1:5000).
+3. Allow microphone permissions, activate your agent, and start talking to PANDORA.
 
 YOUR AGENT IS READY TO GO NOW!!!
