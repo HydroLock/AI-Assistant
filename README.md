@@ -3,7 +3,7 @@
 PANDORA is an ultra-lightweight, high-performance, completely local voice assistant. Built using a Flask backend, it offloads Speech-to-Text (STT) tasks to the client's web browser, saving massive amounts of system RAM. It pairs a dynamically prompted **Qwen 2.5** brain with the state-of-the-art, lightning-fast **Kokoro TTS** engine for localized, natural speech generation.
 And yes, it possesses a highly sarcastic, energetic personality that strictly addresses you as "Boss".
 
-**NOTE: Depending on the user's choice, they can modify the behaviour and name of the agent. To make these changes, user must visit lines 75-88 in agent.py to directly alter the behaviour of the agent using strong natural language.
+**NOTE: Depending on the user's choice, they can modify the behaviour of the agent. To make these changes, user must visit lines 75-88 in agent.py to directly alter the behaviour of the agent using strong natural language.
 Be advised that to unlock the complete capabilities of PANDORA, your respective system must have 8GB RAM or higher.**
 
 ## ✨ Core Features
